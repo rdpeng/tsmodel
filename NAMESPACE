@@ -1,0 +1,7 @@
+export("Lag", "runMean", "harmonic", "dLag", "xLag", "lspline")
+export("tsdecomp")
+
+importFrom("stats", "filter")
+import("splines")
+
+S3method("plot", "tsdecomp")
