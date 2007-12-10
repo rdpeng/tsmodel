@@ -1,11 +1,11 @@
 Package: tsModel
 Title: Time Series Modeling for Air Pollution and Health
-Depends: R (>= 2.4.1)
-Imports: splines, stats
+Depends: R (>= 2.6.0)
+Imports: splines, stats, tlnise, MASS
 Suggests: gam
 LazyLoad:  yes
-Date:  2007-03-26
-Version: 0.4-4
+Date:  2007-12-10
+Version: 0.5
 Author: Roger D. Peng <rpeng@jhsph.edu>, with contributions from Aidan McDermott
 Maintainer: Roger D. Peng <rpeng@jhsph.edu>
 Description: Tools for specifying time series regression models

@@ -5,3 +5,8 @@ importFrom("stats", "filter")
 import("splines")
 
 S3method("plot", "tsdecomp")
+
+export("poolCoef", "coefSeasonal", "extractBetaCov", "LouisFormat",
+       "fitCitySeason", "multiDFFit", "gibbspool")
+import("tlnise")
+importFrom("MASS", "mvrnorm")
