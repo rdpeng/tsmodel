@@ -19,9 +19,9 @@
 
 ## Fit a single city seasonal model using glm() and ns()
 
-library(splines)
-
 multiDFFit <- function(dfVec, city, ...) {
+	if(!require(NMMAPSdata))
+		stop("need 'NMMAPSdata' package")
 	results <- vector("list", length = length(dfVec))
 	dataframe <- readCity(city)
 
@@ -173,7 +173,6 @@ setupTemp <- function(dataframe, df.Temp, tempModel) {
 	if(tempModel == "default") 
 		temp.f <- default.temp.f
 	else if(tempModel == "rm7") {
-		library(ts)
 		## Create a running 7 day mean of tmpd
 		tmpd <- dataframe[, "tmpd"]
 		rm7tmpd <- filter(tmpd, filter = c(0, rep(1/7, 7)),
@@ -243,7 +242,6 @@ genSeasonInd <- function(dataframe) {
 ## from Aidan's original fitmodel2() function.
 
 setupSmoothTime <- function(dataframe, df.Time, df.time) {
-	library(splines)    
 	df.Time <- round(df.Time)
 	df.time <- round(df.time)
 	subset <- dataframe$subset
