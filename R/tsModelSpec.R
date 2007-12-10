@@ -187,23 +187,23 @@ harmonic <- function(x, nfreq, period, intercept = FALSE) {
 ######################################################################
 
 ## Not exported yet
-constrDL <- function(x, f, by = NULL) {
-	stopifnot(is.list(f))
-	x <- as.numeric(x)
-	np <- length(f)
-	lagmat <- matrix(nrow = length(x), ncol = np)
-
-	for(i in seq(along = f)) {
-		mark <- f[[i]]
-		if(length(mark) > 1)
-			lagmat[, i] <- runMean(x, len = mark[2]-mark[1]+1, lag = mark[1])
-		else if(length(mark) == 1)
-			lagmat[, i] <- Lag(x, mark)
-		else
-			stop("Something wrong")
-	}
-	lagmat
-}
+## constrDL <- function(x, f, by = NULL) {
+## 	stopifnot(is.list(f))
+## 	x <- as.numeric(x)
+## 	np <- length(f)
+## 	lagmat <- matrix(nrow = length(x), ncol = np)
+## 
+## 	for(i in seq(along = f)) {
+## 		mark <- f[[i]]
+## 		if(length(mark) > 1)
+## 			lagmat[, i] <- runMean(x, len = mark[2]-mark[1]+1, lag = mark[1])
+## 		else if(length(mark) == 1)
+## 			lagmat[, i] <- Lag(x, mark)
+## 		else
+## 			stop("Something wrong")
+## 	}
+## 	lagmat
+## }
 
 
 adjustTimeDF <- function(object, dfseq, timeVar = "time", smoothType = "ns") {
