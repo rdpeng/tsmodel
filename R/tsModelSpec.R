@@ -207,7 +207,6 @@ harmonic <- function(x, nfreq, period, intercept = FALSE) {
 
 
 adjustTimeDF <- function(object, dfseq, timeVar = "time", smoothType = "ns") {
-	library(splines)
 	stopifnot(inherits(object, "tsModel"))
 	stopifnot(length(dfseq) > 0)
 	
