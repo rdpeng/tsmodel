@@ -454,3 +454,80 @@ LouisFormat <- function(x, type = c("stderr", "confint"), digits = 2) {
 }
 
 
+
+################################################################################
+################################################################################
+
+gibbspool <- function(b, v, scale = 1, maxiter = 2000, verbose = TRUE, gap = 50,
+		      burn = 1000) {
+	A <- diag(1, ncol(b)) * scale^2
+	df0 <- 1
+	S0 <- diag(1e-5, ncol(b))
+	mu <- rep(0, ncol(b))
+	Sigma <- rowMeans(v, dims = 2)
+	I <- diag(1, ncol(b))
+	n <- nrow(b)
+	if(maxiter < burn)
+		burn <- 1
+	
+	results <- vector("list", length = maxiter)
+	
+	for(i in seq_len(maxiter)) {
+		## Sample beta
+		beta <- lapply(seq_len(n), function(j) {
+			B <- Sigma %*% solve(v[,,j] + Sigma)
+			mvrnorm(1, mu + B %*% (b[j, ] - mu), (I - B) %*% Sigma)
+		})
+		beta <- do.call("rbind", beta)
+
+		## Sample mu
+		B <- A %*% solve(Sigma / n + A)
+		mu <- mvrnorm(1, B %*% colMeans(beta), (I - B) %*% A)
+
+		## Sample Sigma
+		S1 <- 0
+
+		for(j in seq_len(n)) 
+			S1 <- S1 + (beta[j, ] - mu) %o% (beta[j, ] - mu)
+		Sigma <- riwish(n + df0, solve(S0 + S1))
+
+		results[[i]] <- list(mu = mu, Sigma = Sigma)
+
+		if(i %% gap == 0)
+			message("Iterations: ", i)
+	}
+	mu.mcmc <- t(sapply(results, "[[", "mu"))
+	mu.mcmc <- mu.mcmc[-seq(burn), ]
+
+	m <- cbind(est = colMeans(mu.mcmc),
+		   se = apply(mu.mcmc, 2, sd))
+	list(gamma = m, results = results)
+}
+
+## This function was taken from the MCMCpack package.
+
+riwish <- function(v, S) {
+	w <- rwish(v, S)
+	solve(w)
+}
+
+rwish <- function (v, S){
+	if (!is.matrix(S)) 
+		S <- matrix(S)
+	if (nrow(S) != ncol(S)) {
+		stop("S not square in rwish()")
+	}
+	if (v < nrow(S)) {
+		stop("v is less than the dimension of S in rwish()")
+	}
+	p <- nrow(S)
+	CC <- chol(S)
+	Z <- matrix(0, p, p)
+	diag(Z) <- sqrt(rchisq(p, v:(v - p + 1)))
+	if (p > 1) {
+		pseq <- 1:(p - 1)
+		idx <- rep(p * pseq, pseq) + unlist(lapply(pseq, seq))
+		Z[idx] <- rnorm(p * (p - 1)/2)
+	}
+	crossprod(Z %*% CC)
+}
