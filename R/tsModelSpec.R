@@ -206,30 +206,30 @@ harmonic <- function(x, nfreq, period, intercept = FALSE) {
 ## }
 
 
-adjustTimeDF <- function(object, dfseq, timeVar = "time", smoothType = "ns") {
-	stopifnot(inherits(object, "tsModel"))
-	stopifnot(length(dfseq) > 0)
-	
-	confounderFormula <- as.formula(object$call$confounders)
-
-	stopifnot(timeVar %in% all.vars(confounderFormula))
-
-	origTimeVar <- grep(timeVar, attr(terms(confounderFormula), "term.labels"),
-			    value = TRUE)
-	stopifnot(length(origTimeVar) == 1)
-	
-	timeVec <- paste("ns(", timeVar, ", ", dfseq, ")", sep = "")
-	results <- vector("list", length = length(dfseq))
-
-	for(i in seq(along = dfseq)) {
-		newTimeVar <- timeVec[i]
-		newFormula <- as.formula(paste("~ . -", origTimeVar, "+", newTimeVar))
-		results[[i]] <- update(object, confounders = newFormula)
-	}
-	if(length(results) == 1)
-		results <- results[[1]]
-	structure(results, class = "adjustTimeDF", dfseq = dfseq)
-}
+## adjustTimeDF <- function(object, dfseq, timeVar = "time", smoothType = "ns") {
+## 	stopifnot(inherits(object, "tsModel"))
+## 	stopifnot(length(dfseq) > 0)
+## 	
+## 	confounderFormula <- as.formula(object$call$confounders)
+## 
+## 	stopifnot(timeVar %in% all.vars(confounderFormula))
+## 
+## 	origTimeVar <- grep(timeVar, attr(terms(confounderFormula), "term.labels"),
+## 			    value = TRUE)
+## 	stopifnot(length(origTimeVar) == 1)
+## 	
+## 	timeVec <- paste("ns(", timeVar, ", ", dfseq, ")", sep = "")
+## 	results <- vector("list", length = length(dfseq))
+## 
+## 	for(i in seq(along = dfseq)) {
+## 		newTimeVar <- timeVec[i]
+## 		newFormula <- as.formula(paste("~ . -", origTimeVar, "+", newTimeVar))
+## 		results[[i]] <- update(object, confounders = newFormula)
+## 	}
+## 	if(length(results) == 1)
+## 		results <- results[[1]]
+## 	structure(results, class = "adjustTimeDF", dfseq = dfseq)
+## }
 
 
 
