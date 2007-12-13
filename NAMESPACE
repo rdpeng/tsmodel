@@ -1,12 +1,12 @@
-export("Lag", "runMean", "harmonic", "dLag", "xLag", "lspline")
-export("tsdecomp")
+export("Lag", "runMean", "harmonic", "tsdecomp")
 
-importFrom("stats", "filter")
-import("splines")
+importFrom(stats, "filter")
+import(splines)
 
 S3method("plot", "tsdecomp")
 
 export("poolCoef", "coefSeasonal", "extractBetaCov", "LouisFormat",
        "fitCitySeason", "multiDFFit", "gibbspool")
-import("tlnise")
-importFrom("MASS", "mvrnorm")
+
+import(tlnise)
+importFrom(MASS, "mvrnorm")
