@@ -1,6 +1,6 @@
 
-R : Copyright 2005, The R Foundation for Statistical Computing
-Version 2.2.1  (2005-12-20 r36812)
+R version 2.6.1 (2007-11-26)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -16,7 +16,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(tsModel)
-Time Series Modeling for Air Pollution and Health (version 0.4)
+Time Series Modeling for Air Pollution and Health (0.5)
 > 
 > x <- rep(1:5, 2)
 > f <- gl(2, 5)
@@ -27,21 +27,6 @@ Time Series Modeling for Air Pollution and Health (version 0.4)
  [1]  2  3  4  5 NA  2  3  4  5 NA
 > Lag(x, 0, f)
  [1] 1 2 3 4 5 1 2 3 4 5
-> 
-> set.seed(10)
-> x <- rep(rnorm(5), 2)
-> dLag(x, 0:2, f)
-               0          1          2
- [1,]         NA         NA         NA
- [2,]         NA         NA         NA
- [3,] -1.3713305  0.3790851  0.5495937
- [4,] -0.5991677 -1.2526536 -0.6310018
- [5,]  0.2945451 -0.7832367  1.2751822
- [6,]         NA         NA         NA
- [7,]         NA         NA         NA
- [8,] -1.3713305  0.3790851  0.5495937
- [9,] -0.5991677 -1.2526536 -0.6310018
-[10,]  0.2945451 -0.7832367  1.2751822
 > 
 > x <- rep(1:5, each = 2)
 > f <- gl(5, 2)
