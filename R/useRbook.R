@@ -459,11 +459,11 @@ LouisFormat <- function(x, type = c("stderr", "confint"), digits = 2) {
 ################################################################################
 ################################################################################
 
-gibbspool <- function(b, v, scale = 1, maxiter = 2000, verbose = TRUE, gap = 50,
-		      burn = 1000) {
+gibbspool <- function(b, v, scale = 1, maxiter = 2000, burn = 500,
+		      pScale = 1e-5) {
 	A <- diag(1, ncol(b)) * scale^2
 	df0 <- 1
-	S0 <- diag(1e-5, ncol(b))
+	S0 <- diag(pScale, ncol(b))
 	mu <- rep(0, ncol(b))
 	Sigma <- rowMeans(v, dims = 2)
 	I <- diag(1, ncol(b))
@@ -493,12 +493,10 @@ gibbspool <- function(b, v, scale = 1, maxiter = 2000, verbose = TRUE, gap = 50,
 		Sigma <- riwish(n + df0, solve(S0 + S1))
 
 		results[[i]] <- list(mu = mu, Sigma = Sigma)
-
-		if(i %% gap == 0)
-			message("Iterations: ", i)
 	}
+	if(burn > 0)
+		results <- results[-seq_len(burn)]
 	mu.mcmc <- t(sapply(results, "[[", "mu"))
-	mu.mcmc <- mu.mcmc[-seq(burn), ]
 
 	m <- cbind(est = colMeans(mu.mcmc),
 		   se = apply(mu.mcmc, 2, sd))
