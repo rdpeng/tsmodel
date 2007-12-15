@@ -4,9 +4,10 @@ importFrom(stats, "filter")
 import(splines)
 
 S3method("plot", "tsdecomp")
+S3method("print", "poolingResult")
 
 export("poolCoef", "coefSeasonal", "extractBetaCov", "LouisFormat",
-       "fitCitySeason", "multiDFFit", "gibbspool")
+       "fitCitySeason", "multiDFFit", "gibbspool", "pooling")
 
 import(tlnise)
 importFrom(MASS, "mvrnorm")

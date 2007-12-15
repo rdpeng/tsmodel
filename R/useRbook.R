@@ -39,7 +39,7 @@ multiDFFit <- function(dfVec, city, ...) {
 ## frame for a particular city, should fit the usual NMMAPS model,
 
 fitCitySeason <- function(data, pollutant = "l1pm10tmean", cause = "death",
-                          season = c("none", "periodic", "periodic2", "factor2"),
+                          season = c("none", "periodic", "factor2"),
                           tempModel = c("default", "rm7", "tempInt", "SeasonInt"),
                           dfyr.Time = 7, pdfyr.time = 0.15,
                           df.Temp = 6, df.Dew = 3,
@@ -529,4 +529,30 @@ rwish <- function (v, S){
 		Z[idx] <- rnorm(p * (p - 1)/2)
 	}
 	crossprod(Z %*% CC)
+}
+
+
+################################################################################
+## MOM pooling
+
+pooling <- function(estimate, var) {
+    mu <- weighted.mean(estimate, 1 / var)
+    nv <- max(var(estimate) - mean(var), 0)
+    std <- sqrt(1 / sum(1 / (var + nv)))
+    structure(list(mu = mu, std = std, 
+                   df = length(estimate)-2, 
+                   het = sqrt(nv)),
+              class = "poolingResult")
+}
+
+print.poolingResult <- function(x, ...) {
+    m <- with(x, matrix(c(mu, std, mu/std, 
+                          pt(abs(mu/std),  df,
+                             lower.tail = FALSE)),
+                        byrow = TRUE, ncol = 4))
+    colnames(m) <- c("Estimate", "Std. Error", 
+                     "t value", "Pr(>|t|)")
+    rownames(m) <- c("National avg.")
+    printCoefmat(m)
+    invisible(x)             
 }
