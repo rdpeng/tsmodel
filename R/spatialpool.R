@@ -5,7 +5,7 @@ distmat <- function(x, y, phi) {
 }
 
 
-spatialgibbs <- function(b, v, x, y, phi = 0.1, scale = 1, maxiter = 2000,
+spatialgibbs <- function(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000,
                          burn = 500, a0 = 10, b0 = 100000) {
         d <- 1 * scale^2
         D <- diag(d, length(b))
