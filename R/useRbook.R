@@ -344,7 +344,7 @@ numdf <- function(usedata,num=5){
 ## cov: a vector of length N or a p x p x N array.
 
 poolCoef <- function(b, cov = NULL, w = NULL, 
-                     method = c("tlnise", "lme", "fixed"),
+                     method = c("tlnise", "fixed"),
                      extractors = NULL, ...) {
         method <- match.arg(method)
 
@@ -368,10 +368,8 @@ poolCoef <- function(b, cov = NULL, w = NULL,
                 if(is.null(extractors))
                         pooled <- summary(fit)$coefficients[1, 1:2]
         }   
-        else if(method == "lme") 
-                stop("Not implemented yet")
         else
-                stop("Invalid ", sQuote("method"), " specified")
+                stop("invalid 'method' specified")
         if(!is.null(extractors)) 
                 pooled <- lapply(extractors, function(f) f(fit))
         pooled
@@ -386,7 +384,7 @@ coefSeasonal <- function(results, pollutant, method = "factor2",
                 colnames(coefmat) <- c("Estimate", "Std. Error")
         }
         else
-                stop("Invalid ", sQuote("method"), " specified")
+                stop("invalid 'method' specified")
         coefmat
 }
 
