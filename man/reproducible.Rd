@@ -17,8 +17,7 @@
 coefSeasonal(results, pollutant, method = "factor2",
              Seasons = c("Winter", "Spring", "Summer", "Fall"))
 multiDFFit(dfVec, city, ...)
-poolCoef(b, cov = NULL, w = NULL, 
-         method = c("tlnise", "lme", "fixed"),
+poolCoef(b, cov = NULL, w = NULL, method = c("tlnise", "fixed"),
          extractors = NULL, ...)
 extractBetaCov(results, pollutant)
 LouisFormat(x, type = c("stderr", "confint"), digits = 2)
@@ -39,14 +38,19 @@ pooling(estimate, var)
     vectors}
   \item{cov,v}{a vector of N variances or a p x p x N array of covariances
     matrices}
+  \item{w}{second-stage covariates to include in the hierarchical model}
   \item{extractors}{a list of functions}
   \item{x}{a numeric matrix}
   \item{type}{type of output to produce}
+  \item{digits}{number of digits of output to use}
   \item{scale}{prior standard deviation of the national average}
   \item{maxiter}{maximum number of iterations in the Gibbs sampler}
   \item{burn}{number of iterations to discard}
   \item{pScale}{scaling coefficient for the prior variance of the
     heterogeneity parameter}
+  \item{estimate}{a vector of coefficients}
+  \item{var}{a vector of coefficient variances}
+  \item{...}{other arguments passed to \code{fitCitySeason}}
 }
 \details{
   These functions are used to reproduce a seasonal analysis of air
