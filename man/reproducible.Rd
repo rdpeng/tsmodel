@@ -49,15 +49,11 @@ pooling(estimate, var)
     heterogeneity parameter}
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+  These functions are used to reproduce a seasonal analysis of air
+  pollution and mortality in the United States (see the reference
+  below).
 }
-\value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
-}
+
 \references{
   Peng RD, Dominic F (2008). \emph{Statistical Methods for Environmental
     Epidemiology in R: A Case Study in Air Pollution and Health}, Springer.
