@@ -20,8 +20,8 @@
 ## Fit a single city seasonal model using glm() and ns()
 
 multiDFFit <- function(dfVec, city, ...) {
-        if(!require(NMMAPSdata))
-                stop("need 'NMMAPSdata' package")
+        if(!require(NMMAPSlite))
+                stop("need 'NMMAPSlite' package")
         results <- vector("list", length = length(dfVec))
         dataframe <- readCity(city)
 
