@@ -58,7 +58,8 @@ fitCitySeason <- function(data, pollutant = "l1pm10tmean", cause = "death",
         is.na(data[, cause]) <- as.logical(data[, paste("mark", cause, sep = "")])
 
         ## Coerce to factor; very important!
-        data <- transform(data, dow = as.factor(dow), agecat = as.factor(agecat))
+        data$dow <- as.factor(data$dow)
+        data$agecat <- as.factor(data$agecat)
         nAges <- length(levels(data[, "agecat"]))
         
         ## Specify/setup temperature variables
