@@ -1,6 +1,6 @@
 ###############################################################################
 ## Time Seris Model Specification for Air Pollution and Health
-## Copyright (C) 2004, Roger D. Peng <rpeng@jhsph.edu>
+## Copyright (C) 2004-2010, Roger D. Peng <rpeng@jhsph.edu>
 ##     
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -68,8 +68,7 @@ Lag <- function(v, k, group = NULL) {
         v <- as.numeric(v)
         
         if(max(abs(k)) >= length(v))
-                stop("Largest lag in ", sQuote("k"), " must be less than ",
-                     sQuote("length(v)"))
+                stop("largest lag in 'k' must be less than 'length(v)'")
 
         lag.f <- function(x) { 
                 lagmat <- matrix(nrow = length(x), ncol = length(k))
@@ -112,7 +111,7 @@ dLag <- function(v, k, group = NULL) {
                 xqr <- qr(lagmat[use, ], LAPACK = FALSE)
                 
                 if(xqr$rank < ncol(lagmat))  
-                        stop("Problem with rank of lag matrix")
+                        stop("problem with rank of lag matrix")
                 d <- qr.R(xqr)[1, 1]
                 X <- qr.Q(xqr, Dvec = rep(d, length(k)))
                 
