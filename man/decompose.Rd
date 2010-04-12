@@ -16,9 +16,6 @@ tsdecomp(x, breaks)
     into that number of frequncies. This argument is passed directly to
     \code{cut} to determine the break points. See \code{cut} for more details.} 
 }
-\details{
-
-}
 \value{
   A matrix with dimension n x m where n is the length of \code{x} and m
   is the number of break categories.

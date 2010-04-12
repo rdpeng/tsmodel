@@ -31,7 +31,7 @@ harmonic(x, nfreq, period, intercept = FALSE)
 }
 
 \author{Roger D. Peng}
-\seealso{}
+
 \examples{
 ## Ten day "time series"
 x <- rnorm(10)
