@@ -1,9 +1,10 @@
 \name{spatialgibbs}
 \alias{spatialgibbs}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{Fit Hierarchical Model with Spatial Covariance}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  This function fits a Normal hierarchical model with a spatial
+  covariance structure via MCMC.
 }
 \usage{
 spatialgibbs(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000, burn = 500, a0 = 10, b0 = 100000)
@@ -25,7 +26,8 @@ spatialgibbs(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000, burn = 500, a0 = 
 \details{
   This function is used to produce pooled national average estimates of
   air pollution risks taking into account potential spatial correlation
-  between the risks.  The function uses a Gibbs sampler to produce the
+  between the risks.  The function uses a Markov chain Monte Carlo
+  sampler to produce the
   posterior distribution of the national average estimate and the
   heterogeneity variance.  See the reference below for more details.
 }
