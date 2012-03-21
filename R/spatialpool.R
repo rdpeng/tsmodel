@@ -61,7 +61,7 @@ ldmvnorm <- function(x, mean, sigma) {
 
         sigmaI <- solve(qr(sigma, LAPACK = TRUE))
         distval <- mahalanobis(x, center = mean, cov = sigmaI, inverted = TRUE)
-        logdet <- as.numeric(determinant(sigma, log = TRUE)$modulus)
+        logdet <- as.numeric(determinant(sigma, logarithm = TRUE)$modulus)
         logretval <- -(ncol(x) * log(2 * pi) + logdet + distval) / 2
         logretval
 }
