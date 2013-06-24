@@ -1,5 +1,5 @@
 ###############################################################################
-## Time Seris Model Specification for Air Pollution and Health
+## Time Series Model Specification for Air Pollution and Health
 ## Copyright (C) 2004-2010, Roger D. Peng <rpeng@jhsph.edu>
 ##     
 ## This program is free software; you can redistribute it and/or modify
