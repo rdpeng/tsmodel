@@ -7,7 +7,8 @@
   covariance structure via MCMC.
 }
 \usage{
-spatialgibbs(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000, burn = 500, a0 = 10, b0 = 100000)
+spatialgibbs(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000,
+             burn = 500, a0 = 10, b0 = 100000)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
