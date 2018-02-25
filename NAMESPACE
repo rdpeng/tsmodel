@@ -6,3 +6,7 @@ import(splines)
 S3method("plot", "tsdecomp")
 
 export("spatialgibbs")
+importFrom("graphics", "par", "plot")
+importFrom("stats", "as.formula", "complete.cases", "dist", "fft",
+    "glm.control", "mahalanobis", "quantile", "rgamma", "rnorm",
+     "runif", "terms")
