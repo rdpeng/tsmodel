@@ -3,7 +3,6 @@ Title: Time Series Modeling for Air Pollution and Health
 Depends: R (>= 3.0.0)
 Imports: splines, stats
 Suggests: 
-    gam,
     testthat
 Version: 0.6-1
 Author: Roger D. Peng <rpeng@jhsph.edu>, with contributions from Aidan McDermott
