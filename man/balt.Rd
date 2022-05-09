@@ -33,7 +33,5 @@
     \item{Age3Ind}{indicator for age category 3 (75 and above)}
   }
 }
-\source{
-  See \url{http://www.ihapss.jhsph.edu/}.
-}
+
 \keyword{datasets}
