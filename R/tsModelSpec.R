@@ -168,8 +168,7 @@ harmonic <- function(x, nfreq, period, intercept = FALSE) {
         pi <- base::pi  ## Just in case someone has redefined pi!
         x <- as.numeric(x)
 
-        N <- seq(0, nfreq - 1)
-        k <- 2^N * 2 * pi / period
+        k <- seq(1, nfreq) * 2 * pi / period
         M <- outer(x, k)
         sinM <- apply(M, 2, sin)
         cosM <- apply(M, 2, cos)
