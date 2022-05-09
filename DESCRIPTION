@@ -1,6 +1,6 @@
 Package: tsModel
 Title: Time Series Modeling for Air Pollution and Health
-Depends: R (>= 3.0.0)
+Depends: R (>= 4.0.0)
 Imports: splines, stats
 Suggests: 
     testthat
