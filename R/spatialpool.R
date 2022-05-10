@@ -4,7 +4,31 @@ distmat <- function(x, y, phi) {
         exp(-phi * abs(dmat))
 }
 
-
+#' Fit Hierarchical Model with Spatial Covariance
+#' 
+#' This function fits a Normal hierarchical model with a spatial covariance structure via MCMC.
+#' 
+#' @param b a vector of regression coefficients
+#' @param v {a vector of regression coefficient variances
+#' @param x a vector of x-coordinates
+#' @param y a vector of y-coordinates
+#' @param phi scale parameter for exponential covariance function
+#' @param scale scaling parameter for the prior variance of the national average estimate
+#' @param maxiter maximum number of iterations in the Gibbs sampler
+#' @param burn number of iterations to discard
+#' @param a0 parameter for Gamma prior on heterogeneity variance
+#' @param b0 parameter for Gamma prior on heterogeneity variance
+#' 
+#' @details   This function is used to produce pooled national average estimates
+#'   of air pollution risks taking into account potential spatial correlation
+#'   between the risks.  The function uses a Markov chain Monte Carlo sampler to
+#'   produce the posterior distribution of the national average estimate and the
+#'   heterogeneity variance.  See the reference below for more details.
+#' 
+#' @references Peng RD, Dominic F (2008). \emph{Statistical Methods for Environmental Epidemiology in R: A Case Study in Air Pollution and Health}, Springer.
+#' @author Roger D. Peng \email{rpeng@jhsph.edu}
+#' @importFrom stats rnorm rgamma mahalanobis
+#' @export
 spatialgibbs <- function(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000,
                          burn = 500, a0 = 10, b0 = 100000) {
         d <- 1 * scale^2
