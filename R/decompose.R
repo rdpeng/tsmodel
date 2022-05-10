@@ -29,6 +29,7 @@
 #' ## you can only have up to 50 cycles in 101 data points.
 #' 
 #' @export
+#' @importFrom stats fft
 tsdecomp <- function(x, breaks) {
         ## Check for missing values
         nax <- is.na(x)
@@ -67,6 +68,8 @@ tsdecomp <- function(x, breaks) {
         structure(mat, breaks = breaks, class = c("tsdecomp", "matrix"))
 }
 
+#' @importFrom graphics par
+#' @exportS3Method 
 plot.tsdecomp <- function(x, y, xlab = "", ylab = "", ...) {
         breaks <- attr(x, "breaks")
         xpts <- seq(NROW(x))

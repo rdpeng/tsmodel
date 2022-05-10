@@ -63,6 +63,25 @@ xLag <- function(v, k, group = NULL) {
         drop(D)
 }
 
+#' Create Lagged Variables
+#' 
+#' Create a matrix of lagged variables
+#' 
+#' @param v a numeric vector
+#' @param k an integer vector giving lag numbers
+#' @param group a factor or a list of factors defining groups of observations
+#' 
+#' @export
+#' @examples 
+#' ## Ten day "time series"
+#'x <- rnorm(10)
+#' 
+#' ## Lag 1 of `x'
+#' Lag(x, 1)
+#' 
+#' ## Lag 0, 1, and 2 of `x'
+#' Lag(x, 0:2)
+#' 
 Lag <- function(v, k, group = NULL) {
         stopifnot(length(k) > 0)
         v <- as.numeric(v)
@@ -98,6 +117,7 @@ Lag <- function(v, k, group = NULL) {
         drop(lagmat)
 }
 
+#' @importFrom stats complete.cases
 dLag <- function(v, k, group = NULL) {
         stopifnot(length(k) > 0)
         v <- as.numeric(v)
@@ -135,6 +155,25 @@ dLag <- function(v, k, group = NULL) {
         drop(D)
 }
 
+#' Compute Running Means
+#' 
+#' Compute the running mean of a vector
+#' 
+#' @param v a numeric vector
+#' @param lags an integer vector giving lag numbers
+#' @param group a factor or a list of factors defining groups of observations
+#' @param filter a vector specifying a linear filter
+#' 
+#' @importFrom stats filter
+#' 
+#' @export
+#' @examples 
+#' ## Ten day "time series"
+#' x <- rnorm(10)
+#' 
+#' ## Running mean of lag 0, 1, and 2
+#' runMean(x, 0:2)
+#' 
 runMean <- function(v, lags = 0, group = NULL, filter = NULL) {
         if(is.null(filter)) {
                 first.lag <- min(lags)
@@ -163,6 +202,16 @@ runMean2 <- function(v, lags = 0, group = NULL, na.rm = FALSE) {
         rowMeans(lagMat, na.rm = na.rm)
 }
 
+#' Create a sine/cosine basis
+#' 
+#' Create a matrix of sine and cosine basis vectors
+#' 
+#' @param x a numeric vector
+#' @param nfreq number of sine/cosine pairs to include
+#' @param period the period
+#' @param intercept should basis matrix include a column of 1s?
+#' 
+#' @export
 harmonic <- function(x, nfreq, period, intercept = FALSE) {
         stopifnot(nfreq > 0)
         pi <- base::pi  ## Just in case someone has redefined pi!

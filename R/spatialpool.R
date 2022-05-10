@@ -1,3 +1,4 @@
+#' @importFrom stats dist
 distmat <- function(x, y, phi) {
         dmat <- dist(cbind(x, y))
         dmat <- as.matrix(dmat)
@@ -9,7 +10,7 @@ distmat <- function(x, y, phi) {
 #' This function fits a Normal hierarchical model with a spatial covariance structure via MCMC.
 #' 
 #' @param b a vector of regression coefficients
-#' @param v {a vector of regression coefficient variances
+#' @param v a vector of regression coefficient variances
 #' @param x a vector of x-coordinates
 #' @param y a vector of y-coordinates
 #' @param phi scale parameter for exponential covariance function
@@ -27,7 +28,7 @@ distmat <- function(x, y, phi) {
 #' 
 #' @references Peng RD, Dominic F (2008). \emph{Statistical Methods for Environmental Epidemiology in R: A Case Study in Air Pollution and Health}, Springer.
 #' @author Roger D. Peng \email{rpeng@jhsph.edu}
-#' @importFrom stats rnorm rgamma mahalanobis
+#' @importFrom stats rnorm rgamma mahalanobis runif
 #' @export
 spatialgibbs <- function(b, v, x, y, phi = 0.1, scale = 1, maxiter = 1000,
                          burn = 500, a0 = 10, b0 = 100000) {
